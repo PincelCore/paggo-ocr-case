@@ -1,0 +1,18 @@
+-- CreateTable
+CREATE TABLE "Document" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "filename" TEXT NOT NULL,
+    "extractedText" TEXT,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "Chat" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "documentId" INTEGER NOT NULL,
+    "question" TEXT NOT NULL,
+    "answer" TEXT NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT "Chat_documentId_fkey" FOREIGN KEY ("documentId") REFERENCES "Document" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);

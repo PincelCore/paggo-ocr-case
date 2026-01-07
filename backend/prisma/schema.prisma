@@ -1,0 +1,33 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+//tabela dos docs
+model Document {
+  id            Int      @id @default(autoincrement()) //chave primaria identificadora
+  filename      String
+  extractedText String? //campo opcional "?"
+  createdAt     DateTime @default(now()) 
+  updatedAt     DateTime @updatedAt
+  
+  chats         Chat[]   // Relaçao 1 para n: 1 documento tem varios chats
+}
+
+//tabela do chat com o llm
+model Chat {
+  id         Int      @id @default(autoincrement()) //PK
+  documentId Int //chave estrangeira para id
+  question   String
+  answer     String
+  createdAt  DateTime @default(now())
+  
+  document   Document @relation(fields: [documentId], references: [id]) //apontar fk para pk da outra tabela
+}
