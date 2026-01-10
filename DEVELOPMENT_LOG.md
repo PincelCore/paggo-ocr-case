@@ -503,18 +503,18 @@ Comecei fazendo o front básico em next.js, sem mistério, eu já manjo razoavel
 
 Sobre o CSS, de início pensei em fazer a estilização na própria div, mas isso seria bem feio e grosseiro, então mudei e separei o css em módulos bonitinho. Resolvi também usar o tailwind para deixar mais bonitinhho. 
 
-![alt text](image.png)
+![alt text](docs/screenshots/image--.png)
 
 Eu geralmente gosto de fazer o frontend me baseando numa tela pré existente do figma, pois é assim que costumo trabalhar. Nesse caso tomei a liberdade para fazer algo genérico mesmo, o tailwind ajuda nisso. 
 
-![alt text](image-1.png)
+![alt text](docs/screenshots/image-1.png)
 
 As telas ficaram mais básicas do que eu gostaria, mas o importante é que o back funciona, pelo incrível que pareça foi só configuras o CORS e tudo já funcionou de primeira. Só tive que ajustar o caminho das rotas do front com o do back porque eu sempre errava. 
 
-![alt text](image-2.png)
+![alt text](docs/screenshots/image-2.png)
 
 Para testar, vou upar um arquivo preto e branco para similar o mais próximo possível o caso de uso.
 
-![alt text](image-3.png)
+![alt text](docs/screenshots/image-3.png)
 
 Pelos meus testes, imagens coloridas e com textos de tamanhos muito distorcidos causam problema no ocr, isso é um ponto a se melhorar, mas para um mvp ele está bem decente, estou satisfeito e irei fazer o deploy.
