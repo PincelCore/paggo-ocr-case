@@ -100,6 +100,10 @@ npm run dev
 ## 🚀 Deploy
 
 ### Backend (Railway)
+
+O backend foi deployado utilizando o Railway com Node.js e Prisma.
+
+Passos para deploy:
 ```bash
 # 1. Instalar Railway CLI
 npm install -g @railway/cli
@@ -107,13 +111,29 @@ npm install -g @railway/cli
 # 2. Login
 railway login
 
-# 3. Deploy
+# 3. Inicializar e subir o projeto
 cd backend
 railway init
 railway up
 ```
+Configurações importantes no Railway:
+
+Node.js >= 20
+
+Start Command:
+
+```bash
+npx prisma migrate deploy && node dist/main.js
+```
+Esse start command é importantíssimo, sem ele o banco fica vazio e o backend não funciona.
+
+Variáveis de ambiente(pega no .env do backend e coloca aqui):
+DATABASE_URL
+JWT_SECRET
+PORT (opcional, Railway define automaticamente)
 
 ### Frontend (Vercel)
+Via CLI:
 ```bash
 # 1. Instalar Vercel CLI
 npm install -g vercel
@@ -121,9 +141,12 @@ npm install -g vercel
 # 2. Deploy
 cd frontend
 vercel
-
-# Seguir instruções interativas
 ```
+Ou pelo próprio site do vercel que é mais fácil, mas o mais importante é configurar a variável ambiente:
+```bash
+NEXT_PUBLIC_API_URL=https://<url-do-backend-no-railway>
+```
+Digite o https:// e depois cole a URL do seu backend, do contrário todas as requisições Http vão dar erro 405 e retornar JSON vazio
 
 ## 📚 Endpoints da API
 
@@ -165,7 +188,7 @@ curl -X POST http://localhost:3000/auth/login \
   -H "Content-Type: application/json" \
   -d '{
     "email": "teste@email.com",
-    "password": "senha123"
+    "password": "123"
   }'
 ```
 
@@ -173,8 +196,9 @@ curl -X POST http://localhost:3000/auth/login \
 ```bash
 curl -X POST http://localhost:3000/document/upload \
   -H "Authorization: Bearer SEU_TOKEN_AQUI" \
-  -F "file=@caminho/para/imagem.jpg"
+  -F "file=@docs/screenshots/imagem.jpg"
 ```
+Lemrando que o caminho "file=@docs/screenshots/imagem.jpg" é o do projeto, mas se desejável pode ser usado o de sua preferência.
 
 ## 🏗️ Arquitetura
 ```
@@ -226,8 +250,7 @@ curl -X POST http://localhost:3000/document/upload \
 **Solução:** Configurar origins corretas no `main.ts`:
 ```typescript
 app.enableCors({
-  origin: ['https://seu-frontend.vercel.app'],
-  credentials: true,
+  origin: '*'
 });
 ```
 ### Problema de conexão do backend com o banco de dados
@@ -250,13 +273,6 @@ Para produção, recomenda-se:
 - Google Cloud Vision API (99% precisão)
 - AWS Textract
 - Azure Computer Vision
-
-### Trade-off
-Mantive Tesseract.js por ser:
-- ✅ Gratuito
-- ✅ Sem dependências externas
-- ✅ Funciona offline
-- ⚠️ Menor precisão em layouts complexos
 
 ## 👤 Autor
 
