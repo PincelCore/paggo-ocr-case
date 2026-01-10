@@ -1,8 +1,11 @@
-import { Controller, Post, Body, Get, Param } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, UseGuards, Request } from '@nestjs/common';
 import { ChatService } from './chat.service';
 import { PrismaService } from '../prisma/prisma.service';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { ForbiddenException } from '@nestjs/common';
 
 @Controller('chat')
+@UseGuards(JwtAuthGuard)
 export class ChatController {
   constructor(
     private chatService: ChatService,
@@ -10,7 +13,7 @@ export class ChatController {
   ) {}
 
   @Post('ask')
-  async fazerPergunta(@Body() body: { documentId: number; question: string }) {
+  async fazerPergunta(@Body() body: { documentId: number; question: string }, @Request() req) {
     console.log('POST /chat/ask', body);
 
     const document = await this.prisma.document.findUnique({ //buscar doc no bd
@@ -20,18 +23,21 @@ export class ChatController {
     if (!document) {
       return { error: 'Documento não encontrado' };
     }
+    if (document.userId !== req.user.id){
+      throw new ForbiddenException('Voce nao tem permissao para acessar esse doc')
+    }
 
     if (!document.extractedText) {
       return { error: 'Documento não tem texto extraído' };
     }
 
-    // faz pergunta ao claude
+    // faz pergunta para o llm
     const answer = await this.chatService.fazerPergunta(
       document.extractedText,
       body.question
     );
 
-    // salvar pergunta e resposta no banco
+    // salvar pergunta e resposta no banco para historico
     const chat = await this.prisma.chat.create({
       data: {
         documentId: body.documentId,
@@ -49,8 +55,17 @@ export class ChatController {
   }
 
   @Get('history/:documentId') //funcao do requisito de historico do chat
-  async getChatHistory(@Param('documentId') documentId: string) {
+  async puxarHistoricoChat(@Param('documentId') documentId: string, @Request() req) {
     console.log('GET /chat/history/' + documentId);
+
+    //permissao
+    const document = await this.prisma.document.findUnique({
+      where: { id: Number(documentId) }
+    });
+
+    if (document && document.userId !== req.user.id) {
+      throw new ForbiddenException('Voce nao tem permissao');
+    }
 
     const chats = await this.prisma.chat.findMany({
       where: { documentId: Number(documentId) },

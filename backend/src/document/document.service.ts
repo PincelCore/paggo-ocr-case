@@ -1,65 +1,94 @@
-import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { OcrService } from '../ocr/ocr.service'; 
+import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
+import { OcrService } from '../ocr/ocr.service';
 
-@Injectable() //logica do negocio que eu defini na arquitetura da sol
+@Injectable()
 export class DocumentService {
-    constructor(
-        private prisma: PrismaService,
-        private ocrService: OcrService,
-    ) {}
+  constructor(
+    private prisma: PrismaService,
+    private ocrService: OcrService,
+  ) {}
 
-   async processarUpload(file: Express.Multer.File) { //antes era data:any para os testes, agora eu to colocando o multer para aceitar os uploads reais de arquivos 
-        if(!file){
-            throw new Error('Nenhum arquivo enviado'); // catch throw, tratamento de exceções POO
-        }
-
-        console.log('Processando arquivo: ', file.filename);
-
-        let extractedText = ''; //n pode null, mudei para string vazia
-        try{
-            extractedText = await this.ocrService.extractText(file.path);
-            console.log('Texto extraído com sucesso!');
-        } catch (error) {
-            console.error('Erro no OCR, continuando sem texto analisado: ', error.message);
-        }
-        
-        const document = await this.prisma.document.create({
-            data: {
-                filename: file.filename,
-                extractedText: extractedText,
-            }
-        });
-
-        return {
-            sucess:true,
-            message: 'Arquivo salvo com sucesso!',
-            document: document,
-            file: { //essa struct aqui pra armazenar os nomes do arquivo, tamanho e diretorio
-                originalName: file.originalname,
-                savedAs: file.filename,
-                size: file.size,
-                path: file.filename,
-            },
-            ocr: {
-                sucess: extractedText !== null,
-                textLength: extractedText?.length || 0,
-                preview: extractedText?.substring(0, 200) || 'Sem texto extraído',
-            }
-        };
-    }
-    async pegarDocumentos(){
-        return await this.prisma.document.findMany({
-            orderBy: {
-                createdAt: 'desc',
-            }
-        });
+  async processarUpload(file: Express.Multer.File, userId: number) {
+    if (!file) {
+      throw new Error('Nenhum arquivo enviado!');
     }
 
-    async pegarDocumentoPorId(id: number){
-        return await this.prisma.document.findUnique({
-            where: {id: id},
-        });
+    console.log('Processando arquivo:', file.filename);
+
+    
+    let extractedText = '';
+    try {
+      extractedText = await this.ocrService.extractText(file.path);
+      console.log('Texto extraído com sucesso!');
+    } catch (error) {
+      console.error('Erro no OCR:', error.message);
     }
+
+    
+    const document = await this.prisma.document.create({
+      data: {
+        filename: file.filename,
+        extractedText: extractedText,
+        userId: userId,  
+      }
+    });
+
+    return {
+      success: true,
+      message: 'Arquivo processado com sucesso!',
+      document: document,
+      file: {
+        originalName: file.originalname,
+        savedAs: file.filename,
+        size: file.size,
+        path: file.path,
+      },
+      ocr: {
+        success: extractedText !== null,
+        textLength: extractedText?.length || 0,
+        preview: extractedText?.substring(0, 200) || 'Sem texto',
+      }
+    };
+  }
+//   return {
+//     success: true,
+//     message: 'Arquivo processado com sucesso!',
+//     document: document,
+//     file: {
+//       originalName: file.filename,
+//       savedAs: file.filename,
+//       size: file.size,
+//       path: file.path,
+//     },
+//     ocr: {
+//       success: extractedText !== '',
+//       textLength: extractedText?.length || 0,
+//       preview: extractedText?.substring(0, 200) || 'Sem texxto',
+//     }
+//   };
+// }
+
+  async pegarDocumentos(userId: number) {
+    return await this.prisma.document.findMany({
+      where: { userId: userId },
+      orderBy: { createdAt: 'desc' }
+    });
+  }
+
+  async pegarDocumentoPorId(id: number, userId: number) {
+    const document = await this.prisma.document.findUnique({
+      where: { id: id }
+    });
+
+    if (!document) {
+      throw new NotFoundException('Documento não encontrado');
+    }
+
+    if (document.userId !== userId) {
+      throw new ForbiddenException('Você não tem permissão para acessar este documento');
+    }
+
+    return document;
+  }
 }
-

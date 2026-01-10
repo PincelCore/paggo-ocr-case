@@ -1,0 +1,205 @@
+.containerPrincipal {
+    min-height: 100vh;
+    background-color: #f9fafb;
+  }
+  
+  .cabecalho {
+    background: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .conteudoCabecalho {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .titulo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111827;
+  }
+  
+  .botaoSair {
+    color: #ef4444;
+    font-weight: 500;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .botaoSair:hover {
+    color: #dc2626;
+  }
+  
+  .conteudo {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+  
+  .grade {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  @media (min-width: 768px) {
+    .grade {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  .secao {
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+  }
+  
+  .tituloSecao {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  
+  .campoArquivo {
+    margin-bottom: 1rem;
+  }
+  
+  .labelArquivo {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+  }
+  
+  .inputArquivo {
+    display: block;
+    width: 100%;
+    font-size: 0.875rem;
+    color: #6b7280;
+    cursor: pointer;
+  }
+  
+  .inputArquivo::file-selector-button {
+    margin-right: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    border: none;
+    background-color: #eff6ff;
+    color: #2563eb;
+    cursor: pointer;
+  }
+  
+  .inputArquivo::file-selector-button:hover {
+    background-color: #dbeafe;
+  }
+  
+  .areaPreview {
+    margin-bottom: 1rem;
+  }
+  
+  .labelPreview {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  
+  .imagemPreview {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    border: 1px solid #e5e7eb;
+    max-height: 16rem;
+    object-fit: contain;
+  }
+  
+  .resultado {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: #f0fdf4;
+    border: 1px solid #86efac;
+    border-radius: 0.5rem;
+  }
+  
+  .tituloResultado {
+    font-weight: 600;
+    color: #166534;
+    margin-bottom: 0.5rem;
+  }
+  
+  .infoResultado {
+    font-size: 0.875rem;
+    color: #15803d;
+    margin-bottom: 0.5rem;
+  }
+  
+  .textoExtraido {
+    background: white;
+    padding: 0.75rem;
+    border-radius: 0.375rem;
+    border: 1px solid #d1d5db;
+    font-size: 0.875rem;
+    max-height: 10rem;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+  }
+  
+  .mensagemVazia {
+    color: #6b7280;
+    text-align: center;
+    padding: 2rem;
+  }
+  
+  .listaDocumentos {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .itemDocumento {
+    padding: 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .itemDocumento:hover {
+    background-color: #f9fafb;
+  }
+  
+  .conteudoItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+  .infoItem {
+    flex: 1;
+  }
+  
+  .nomeArquivo {
+    font-weight: 500;
+    color: #111827;
+    margin-bottom: 0.25rem;
+  }
+  
+  .dataArquivo {
+    font-size: 0.875rem;
+    color: #6b7280;
+  }
+  
+  .indicadorLink {
+    color: #2563eb;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }

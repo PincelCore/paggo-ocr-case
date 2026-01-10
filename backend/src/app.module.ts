@@ -5,13 +5,15 @@ import { PrismaModule } from './prisma/prisma.module';
 import { DocumentModule } from './document/document.module';
 import { OcrModule } from './ocr/ocr.module';
 import { ChatModule } from './chat/chat.module'; 
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
     PrismaModule,
     DocumentModule,
     OcrModule,
-    ChatModule,  
+    ChatModule,
+    AuthModule,  
   ],
   controllers: [AppController],
   providers: [AppService],

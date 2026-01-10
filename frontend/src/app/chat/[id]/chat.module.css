@@ -1,0 +1,168 @@
+.containerPrincipal {
+    min-height: 100vh;
+    background-color: #f9fafb;
+  }
+  
+  .cabecalho {
+    background: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .conteudoCabecalho {
+    max-width: 64rem;
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .botaoVoltar {
+    color: #2563eb;
+    font-weight: 500;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .botaoVoltar:hover {
+    color: #1d4ed8;
+  }
+  
+  .titulo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #111827;
+  }
+  
+  .conteudo {
+    max-width: 64rem;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+  
+  .secaoDocumento {
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .tituloDocumento {
+    font-weight: 700;
+    font-size: 1.125rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .textoDocumento {
+    background-color: #f9fafb;
+    padding: 1rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    max-height: 10rem;
+    overflow-y: auto;
+    white-space: pre-wrap;
+  }
+  
+  .secaoHistorico {
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    max-height: 24rem;
+    overflow-y: auto;
+  }
+  
+  .tituloHistorico {
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  
+  .mensagemVazia {
+    color: #6b7280;
+    text-align: center;
+    padding: 2rem;
+  }
+  
+  .listaConversas {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .blocoConversa {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .mensagemUsuario {
+    background-color: #eff6ff;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+  }
+  
+  .autorMensagem {
+    font-weight: 500;
+    color: #1e40af;
+    margin-bottom: 0.25rem;
+  }
+  
+  .textoMensagem {
+    color: #1e3a8a;
+  }
+  
+  .mensagemIA {
+    background-color: #f0fdf4;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+  }
+  
+  .autorIA {
+    font-weight: 500;
+    color: #166534;
+    margin-bottom: 0.25rem;
+  }
+  
+  .textoIA {
+    color: #15803d;
+    white-space: pre-wrap;
+  }
+  
+  .secaoFormulario {
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+  }
+  
+  .labelFormulario {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #374151;
+  }
+  
+  .textareaFormulario {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    resize: vertical;
+  }
+  
+  .textareaFormulario:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  }
+  
+  .textareaFormulario:disabled {
+    background-color: #f3f4f6;
+    cursor: not-allowed;
+  }

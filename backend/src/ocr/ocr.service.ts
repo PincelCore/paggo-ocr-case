@@ -1,19 +1,35 @@
 import { Injectable } from '@nestjs/common';
 import Tesseract from 'tesseract.js';
+import sharp from 'sharp';
+import { join } from 'path';
+import { tmpdir } from 'os';
+import { randomUUID } from 'crypto';
 
 @Injectable()
 export class OcrService {
   
   async extractText(imagePath: string): Promise<string> {
     console.log('🔍 Iniciando OCR em:', imagePath);
+
+    const processedImagePath = join(
+      tmpdir(),
+      `ocr-${randomUUID()}.png`
+    );
     
     try {
+      await sharp(imagePath)
+        .grayscale()
+        .normalize()
+        .linear(1.2, -20)
+        .sharpen()
+        .threshold(180)
+        .toFile(processedImagePath);
+
       const result = await Tesseract.recognize(
-        imagePath,
-        'por+eng',//portugues e ingles, n sei se entendi exatamente qual será o caso de uso
-         {
+        processedImagePath,
+        'por+eng',
+        {
           logger: (info) => {
-            // Log do progresso
             if (info.status === 'recognizing text') {
               console.log(`Progresso OCR: ${Math.round(info.progress * 100)}%`);
             }

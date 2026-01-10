@@ -68,7 +68,7 @@ Pedi ajuda a um amigo meu que é Dev pleno, ele é muito ocupado e respondeu de 
 
 **Primeira ação:** Seguindo o conselho desse amigo meu, pedi ajuda ao Claude AI para entender como funcionaria a arquitetura geral do projeto e, principalmente, a me ajudar a entender os conceitos fundamentais de backend (Controladores, módulos e serviços). Estou me sentindo confiante mesmo sem nunca ter visto backend na vida, até agora estou gostando.
 
-![alt text](image.png)
+![alt text](docs/screenshots/image.png)
 
 **Recursos consultados:**
 - Documentação oficial NestJS: https://docs.nestjs.com
@@ -162,7 +162,7 @@ export class DocumentController {
 }
 ```
 
-### 22:30h - Primeiro Bug 🐛
+### 22:30h - Primeiro Bug 
 
 **Problema:** curl retornando 404
 ```bash
@@ -186,8 +186,8 @@ npm run start:dev
 
 ### 22:45h - Endpoints Funcionando
 
-![[Pasted image 20260107001241.png]]
-![[Pasted image 20260107001035.png]]
+![Pasted image 20260107001241](docs/screenshots/1.png)
+![Pasted image 20260107001035.png](docs/screenshots/2.png)
 
 ### 23:00h - Configurando Prisma
 
@@ -200,7 +200,7 @@ npm install @prisma/client
 npm install -D prisma
 npx prisma init --datasource-provider sqlite
 ```
-![[Pasted image 20260107001543.png]]
+![[Pasted image 20260107001543.png]](docs/screenshots/3.png)
 
 **Schema criado:**
 ```prisma
@@ -227,72 +227,16 @@ npx prisma migrate dev --name init
 npx prisma studio
 ```
 
-![[Pasted image 20260107001642.png]]
+![[Pasted image 20260107001642.png]](docs/screenshots/4.png)
 
 **Reação:** Cara, isso aqui é muito mais legal que phpMyAdmin!
 Lembrou minha aula de Banco de Dados do semestre passado, mas moderno! Até mesmo a linha de relação das tabelas ele mostra, muito daora.
 
-Consegui ver:
-- ✅ Primary Keys (id)
-- ✅ Foreign Keys (documentId)
-- ✅ Relações entre tabelas
-- ✅ Interface limpa e moderna
-
-### 23:30h - Reflexões do Dia
-
-**O que funcionou:**
-- ✅ Pedir ajuda quando travei
-- ✅ Entender conceitos antes de codar
-- ✅ Testar cada passo (curl)
-- ✅ Documentar enquanto faço
-
-**Dificuldades:**
-- ⚠️ TypeScript decorators ainda confusos (não manjo muito  de Angular, só React)
-- ⚠️ Dependency Injection preciso praticar mais
-- ⚠️ Hot reload nem sempre funciona
-
-**Surpresas positivas:**
-- 🎉 NestJS é mais organizado que pensei
-- 🎉 Prisma Studio é incrível
-- 🎉 Claude AI me ajudou MUITO a entender conceitos
-
-**Honestidade:**
-Usei Claude AI intensivamente para:
-- Explicar conceitos (Controllers, Services, DI)
-- Debugar erros (404, permissões)
-- Sugerir estrutura de código
-- MAS: Digitei todo código eu mesmo, entendi cada linha
-
-**Status:** 🟢 Confiante para continuar amanhã!
-
-### ⏳ Próximos Passos (Dia 2)
+###  Planos para amanhã
 1. Conectar endpoints ao banco Prisma
 2. Implementar upload de arquivos (Multer)
 3. Integrar Tesseract.js
 4. Começar Claude API
-
----
-
-## 🎓 Aprendizados Técnicos
-
-### Conceitos Novos Hoje
-1. **NestJS Architecture**
-   - Modules organizam features
-   - Controllers são pontos de entrada HTTP
-   - Services contêm lógica de negócio
-   - Dependency Injection conecta tudo
-
-2. **TypeScript Decorators**
-   - `@Controller()` - Define rota base
-   - `@Injectable()` - Permite injeção
-   - `@Get()` / `@Post()` - Define método HTTP
-   - `@Body()` - Extrai dados da requisição
-
-3. **Prisma ORM**
-   - Schema define estrutura do banco
-   - Migrations criam/atualizam tabelas
-   - Prisma Client gera TypeScript types
-   - Prisma Studio = UI para visualizar dados
 
 ### Comandos Importantes
 ```bash
@@ -347,7 +291,7 @@ npm install prisma@5.22.0 @prisma/client@5.22.0 --save-exact
 ```
 
 2. Corrigir `schema.prisma`:
-![[Pasted image 20260107154244.png]]
+![[Pasted image 20260107154244.png]](docs/screenshots/5.png)
 
 3. Regenerar Client:
 ```bash
@@ -368,21 +312,21 @@ npx prisma migrate dev --name init
 ### 15:30h | ✅ Backend Base Funcionando!
 
 **Status:** Servidor rodando com sucesso!
-![[Pasted image 20260107154550.png]]
+![[Pasted image 20260107154550.png]](docs/screenshots/6.png)
 **Rotas disponíveis:**
 - ✅ POST /document/upload - Salva documento no banco
 - ✅ GET /document/list - Lista todos documentos
 - ✅ GET /document/:id - Busca documento específico
 
 **Testes realizados:**
-![[Pasted image 20260107154623.png]]
+![[Pasted image 20260107154623.png]](docs/screenshots/7.png)
 
 **Verificação no banco:**
 ```bash
 npx prisma studio
 ```
 ✅ Registros visíveis no Prisma Studio
-![[Pasted image 20260107154646.png]]
+![[Pasted image 20260107154646.png]](docs/screenshots/8.png)
 **Tempo gasto hoje:** ~2h (setup + debug)
 **Tempo perdido em debug:** ~1h30min 
 
@@ -398,12 +342,12 @@ npx prisma studio
 Espero ainda hoje terminar pelo menos o OCR e talvez a LLM API, pois eu quero mesmo que nos próximos dias dê para terminar o MVP e fazer o OAuth porque dei uma olhada por alto nessa tecnologia e achei muito bacana, apesar de meio confusa, principalmente o lance de chaves de autenticação.
 
 ### O que temos até agora?
-![[Pasted image 20260107160954.png]]
+![[Pasted image 20260107160954.png]](docs/screenshots/9.png)
 O service do prisma está assim, o decorator injetável é para seer usado em qualquer lugar. O extends do PrismaClient é para herdar as funcionalidades do prisma (coisa básica de POO) para eu ter acesso aos métodos do cliente como document.create e document.findMany. Implements é para que, assim que essa classe for criada vai criar esse método auxiliar que eu nomeei criativamente como "onModuleInit" cuja única função é um async/await para conectar ao banco esperando antes de conectar, ou seja, isso é uma forma de garantir que o app inicie sempre antes conectado ao banco para evitar problema.
 
-![[Pasted image 20260107161515.png]]
+![[Pasted image 20260107161515.png]](docs/screenshots/10.png)
 No prisma module tem esse decorator global para ficar evitando de importar isso em todo lugar.
-![[Pasted image 20260107161730.png]]
+![[Pasted image 20260107161730.png]](docs/screenshots/11.png)
 Em document service modifiquei esses métodos e os tornei async porque ela demora para acessar, aprendi que o par async/await é muito importante no back para poder garantir que as promisses (que pegamos lá no frontend) não sejam vazias, achei isso muito bacana.
 ### 15:50h - Upload de arquivos
 https://youtu.be/XMxKUONCQh8?si=cwOAl7opHn2Wv_-W
@@ -420,14 +364,14 @@ Primeiro, deixa eu definir o que aprendi pesquisando a respeito:
 (`src/config/multer.config.ts`) 
 Criei arquivo de configuração com:
 **1. Storage (onde/como salvar):**
-![[Pasted image 20260107170329.png]]
+![[Pasted image 20260107170329.png]](docs/screenshots/12.png)
 **Por que nome único?** - Evita sobrescrever arquivos - Facilita rastreamento - Previne conflitos de nome 
 **2. FileFilter (validação):** ```typescript fileFilter: (req, file, callback) => { if (!file.mimetype.match(/\/(jpg|jpeg|png|gif)$/)) { return callback(new Error('Apenas imagens!'), false); } callback(null, true); } ``` 
 Valida MIME type antes de salvar (segurança) 
 **3. Limits (tamanho máximo):** ```typescript limits: { fileSize: 5 * 1024 * 1024 // 5MB } ``` 
 **Nota:** Para fazer essa validação eu passei um leve perrengue na sintaxe, daí eu recorri ao Claude que me ajudou a corrigir.
 #### Modificações no Controller
-![[Pasted image 20260107170449.png]]
+![[Pasted image 20260107170449.png]](docs/screenshots/13.png)
 **O que mudou:** 
 - `@UseInterceptors(FileInterceptor('file', multerConfig))` → Ativa Multer 
 - `'file'` = nome do campo no form-data - `multerConfig` = nossas configurações 
@@ -449,7 +393,7 @@ Valida MIME type antes de salvar (segurança)
 6. Controller passa pro Service 
 7. Service salva metadados no banco 
 8. Retorna JSON com informações do upload
-![[Pasted image 20260107171008.png]]
+![[Pasted image 20260107171008.png]](docs/screenshots/14.png)
 
 **Status:** ✅ Upload de arquivos 100% funcional! 
 
@@ -461,13 +405,13 @@ Valida MIME type antes de salvar (segurança)
 
 Aqui finalmente vou implementar algo que não estou aprendendo do zero. Eu já mexi com Tessecact no python para fazer um RAG System, então isso deve ser moleza de adaptar para o JS (Só muda sintaxe basicamente)
 
-![[Pasted image 20260107180850.png]]
+![[Pasted image 20260107180850.png]](docs/screenshots/15.png)
 O serviço ficou assim, sem muito segredo e mistério para mim, basicamente uma tradução para JavaScript daquilo que fazia em Python. No caso coloquei uns logs para depuração, mas provável que vá comentar essas linhas agora que já sei que está funcionando.
 
-![[Pasted image 20260107181028.png]]
+![[Pasted image 20260107181028.png]](docs/screenshots/16.png)
 
 Imagem que eu usei para testar: 
-![[a.png]]
+![[a.png]](docs/screenshots/a.png)
 
 Ele só não conseguiu pegar o top text ali "Universidade Federal do Rio de Janeiro", meu palpite é que seja por causa do contraste da cor azul no verde (cores escuras). Como eu resolveria isso? Da mesma forma que resolvi lá no meu projeto de RAG System do Python: converter a imagem para preto e branco para aumentar o contraste e facilitar a leitura, mas sinceramente eu acho que para o caso de uso (notas fiscais e invoice) não terá problema. De qualquer modo eu vou deixar anotado aqui caso sobre tempo eu vá fazer essa melhoria, mas agora preciso partir para a API da LLM logo para amanhã eu finalizar e integrar tudo no front, pois no caso do front para mim é tranquilo, o problema seria ter que ver essa nova tecnologia do OAuth que nunca mexi (Só vi por alto).
 
@@ -480,11 +424,11 @@ Eu dei uma parada para descansar e fazer outras coisas, agora voltei e vou final
 Criei minha API key gratuita na anthropic e coloquei  no .env do projeto. Depois disso criei o módulo e serviço do chat.
 
 Para codar o serviço, eu dei uma travada e não estava conseguindo tratar um erro na propriedade .text porque ela só podia ser usada em ThinkingBlock e ContentBlock, eu procurei e procurei soluções para esse erro e não achava, daí joguei no próprio Claude e felizmente ele corrigiu para mim:
-![[Pasted image 20260107204912.png]]
+![[Pasted image 20260107204912.png]](docs/screenshots/17.png)
 Eu tinha feito uns erros de sintaxe, mas acontece... Meio frustrante, mas acontece, ao menos estou aprendendo bem rápido esse negócio de backend (Dominei a lógica já).
 
 A função principal de chat.service.ts é a fazerPergunta, mas eu criei uma função extra com uma funcionalidade bem parecida com a funcionalidade que usava no meu RAG (para resumir livros e PDFs)
-![[Pasted image 20260107205323.png]]
+![[Pasted image 20260107205323.png]](docs/screenshots/18.png)
 Até mesmo o prompt é igual a esse meu projeto RAG que eu fiz usando a Mistral no meu ambiente local, acho que isso pode ser interessante.
 
 ### 21:00h - Toques finais
@@ -492,19 +436,19 @@ Eu senti que estava faltando uma forma de tratar as requisições da API, então
 
 Ok, após terminar de colocar tudo nos módulos e terminar o controller (integrar com o prisma também) eu testei e parece que eu esqueci um detalhe bem pequeno: A API Key do Claude não tem mais aquele teste grátis que tinha uns meses atrás.
 
-![[Pasted image 20260107210726.png]]
+![[Pasted image 20260107210726.png]](docs/screenshots/19.png)
 
 Vou ter que substituir...
 
 ### 21:20h - FINALMENTE
 Depois de um tempo fuçando por aí eu encontrei o groq, que disponibiliza API key gratuita e ainda pode usar vários modelos diferentes.
-![[Pasted image 20260107212511.png]]
+![[Pasted image 20260107212511.png]](docs/screenshots/20.png)
 Tive que fazer umas mudanças no chat.service, até tive que tirar aquela função de Type chart. Agora eu coloquei para funcionar:
-![[Pasted image 20260107212826.png]]
+![[Pasted image 20260107212826.png]](docs/screenshots/21.png)
 
 Fiz duas requisições, a primeira perguntei qual o nome do professor da imagem de id4 que está lá no banco e ainda depois fiz uma requisição do histórico.
 
-![[Pasted image 20260107213008.png]]
+![[Pasted image 20260107213008.png]](docs/screenshots/22.png)
 Depois fiz essa outra pergunta e ele não soube responder, claro, o OCR não está enxergando "Universidade Federal do Rio de Janeiro" como eu disse anteriormente, posso facilmente resolver esse problema como eu disse, mas isso vou deixar para depois porque hoje já fiz demais. Estou muito satisfeito de ter terminado de fazer o backend 100% hoje. 
 
 Amanhã farei o frontend e farei a integração e, se der tempo, farei uma autenticação legal com o OAuth (ainda não sei se será no Next ou Nest)
@@ -512,3 +456,65 @@ Amanhã farei o frontend e farei a integração e, se der tempo, farei uma auten
 Vou commitar tudo que eu fiz e dar um push. Eu notei agora que, a cada checkpoint que fiz aqui eu deveria ter commitado, assim ficaria mais fácil de ver o progresso passo a passo, isso é boa prática, mas enfim, vou passar a fazer isso a partir de amanhã.
 
 ---
+## 📚 Dia 3 - Quinta, 08/01/2025 
+
+Hoje eu não pude codar nada e tive que resolver outras questões para poder voltar ao pc e continuar o case. Nesse tempo de ociosidade, eu aproveitei para estudar as tecnologias para fazer esse Auth. De início pensei em algo basicão feito no próprio frontend, um login fake, algo bem básico de crud mesmo como já estou acostumado, mas imaginei que ficaria ruim e então resolvi fazer algo mais elaborado: vou fazer no backend através do JWT. De longe o vídeo que mais me ajudou foi esse: https://youtu.be/EFDUvzJT_wI?si=7h2rga9Fh8Ak1tV9
+agora aprendi os conceitos de rotas privadas e como protegê-las. Ainda assim, sinto que será desafiador implementar o auth.
+
+
+## 📚 Dia 4 - Sexta, 09/01/2025
+
+
+### 12:00h - Terminei o Auth
+Comecei bem cedo 8h em ponto, tive muitas confusões na hora de implementar as mudanças estruturais no controlador e serviço de documentos. No campo de criar o document eu tive que fazer uma leve modificação na função de processar upload, no caso o que ela retorna:
+
+![[Pasted image 20260109125212.png]](docs/screenshots/23.png)
+
+Eu tive que colocar o campo de user com a cláusula connect para pegar o token, porque eu precisei mudar o prisma e do banco de dados de forma geral, 
+adicionando uma nova tabela com o usuário e seus dados de autenticação.
+
+![[Pasted image 20260109125609.png]](docs/screenshots/24.png)
+
+Como a tabela user possui relação  1 para n (1 único usuário pode upar vários docs), tive de criar uma chave estrangeira para relacionar as tabelas. O mais importante para o problema que estava enfrentando é justamente esse novo campo UserId que é a chave estrangeira da tabela User. O que eu esstava falhando era em configurar o controlador corretamente com o novo decorator de autenticação e também ajustar os parâmetros da função de upload (Não só o multer para a imagem, mas agora para fazer upload precisa do usuário também, esse é nosso caso de uso)
+
+![[Pasted image 20260109130033.png]](docs/screenshots/25.png)
+
+E por fim, o ajuste no controlador, na rota de document/upload
+
+![[Pasted image 20260109130224.png]](docs/screenshots/26.png)
+Por fim, fiz um bocado de teste para ver se estava tudo ok:
+
+![[Pasted image 20260109130536.png]](docs/screenshots/27.png)
+Registro.
+
+![[Pasted image 20260109130733.png]](docs/screenshots/28.png)
+
+Fiz uploads, token gerado, tudo normal
+
+![[Pasted image 20260109130823.png]](docs/screenshots/29.png)
+Tentei fazer upload sem token e não funcionou.
+
+![[Pasted image 20260109130924.png]](docs/screenshots/30.png)
+
+Olhando no banco dá para ver que os users são distintos e separados pelos seus respectivos docs upados.
+
+### 15:00h até 21:00h - Terminei o front e conectei ao back
+Comecei fazendo o front básico em next.js, sem mistério, eu já manjo razoavelmente bem de react então foi bem tranquilo fazer o front. Dessa vez, fora de costume eu fiz sem usar axios, mas sim Fetch API. Usei useState do react e modulei igualzinho. Para armazenar o token da sessão vou usar localStorage para não ficar chato de ficar fazendo login toda hora.
+
+Sobre o CSS, de início pensei em fazer a estilização na própria div, mas isso seria bem feio e grosseiro, então mudei e separei o css em módulos bonitinho. Resolvi também usar o tailwind para deixar mais bonitinhho. 
+
+![alt text](image.png)
+
+Eu geralmente gosto de fazer o frontend me baseando numa tela pré existente do figma, pois é assim que costumo trabalhar. Nesse caso tomei a liberdade para fazer algo genérico mesmo, o tailwind ajuda nisso. 
+
+![alt text](image-1.png)
+
+As telas ficaram mais básicas do que eu gostaria, mas o importante é que o back funciona, pelo incrível que pareça foi só configuras o CORS e tudo já funcionou de primeira. Só tive que ajustar o caminho das rotas do front com o do back porque eu sempre errava. 
+
+![alt text](image-2.png)
+
+Para testar, vou upar um arquivo preto e branco para similar o mais próximo possível o caso de uso.
+
+![alt text](image-3.png)
+
+Pelos meus testes, imagens coloridas e com textos de tamanhos muito distorcidos causam problema no ocr, isso é um ponto a se melhorar, mas para um mvp ele está bem decente, estou satisfeito e irei fazer o deploy.
